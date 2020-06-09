@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,7 +28,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, RedirectAttributes rd, ModelAndView mv) throws Exception{
+	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, RedirectAttributes rd, ModelAndView mv, MultipartFile file) throws Exception{
 		if(memberService.memberError(memberVO, br)) {
 			mv.setViewName("member/memberJoin");
 		}else {
@@ -75,24 +76,23 @@ public class MemberController {
 	
 	@GetMapping("memberUpdate")
 	public ModelAndView memberUpdate(ModelAndView mv) throws Exception{
+		MemberVO memberVO = new MemberVO();
+		mv.addObject("memberVO", memberVO);
 		mv.setViewName("member/memberUpdate");
 		return mv;
 	}
 	
 	@PostMapping("memberUpdate")
-	public ModelAndView memberUpdate(MemberVO memberVO, ModelAndView mv, RedirectAttributes rd, HttpSession session) throws Exception{
-		memberVO = memberService.memberJoin(memberVO);
-		if(memberVO!=null) {
+	public ModelAndView memberUpdate(@Valid MemberVO memberVO,BindingResult br, ModelAndView mv, HttpSession session) throws Exception{
+		if(memberService.memberUpdateError(memberVO, br)) {
+			mv.setViewName("member/memberUpdate");
+		}else {
+			memberVO = memberService.memberJoin(memberVO);
 			session.setAttribute("member", memberVO);
 			mv.addObject("result","수정 성공");
 			mv.addObject("path", "member/memberPage");
 			mv.setViewName("common/result");
-		
-		} else {
-			mv.addObject("result","수정 실패");
-			mv.addObject("path", "member/memberUpdate");
-			mv.setViewName("common/result");
-		}
+		}	
 		return mv;
 	}
 	@GetMapping("memberDelete")

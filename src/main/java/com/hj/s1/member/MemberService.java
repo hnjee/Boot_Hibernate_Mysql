@@ -42,4 +42,18 @@ public class MemberService {
 		}
 		return res;
 	}
+	//사용자정의 검증 메서드
+		public boolean memberUpdateError (MemberVO memberVO, BindingResult br) throws Exception{
+			boolean res = false; //에러없으면 false
+			//1. 기본 제공 검증
+			if(br.hasErrors()) {
+				res = true;
+			}
+			//2. pw 일치 검증 
+			if(!memberVO.getPw().equals(memberVO.getPwChk())){
+				br.rejectValue("pwChk", "memberVO.password.notSame");
+				res = true;
+			}
+			return res;
+		}
 }

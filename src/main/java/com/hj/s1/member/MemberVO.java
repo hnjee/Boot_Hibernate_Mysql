@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.hj.s1.member.memberFile.MemberFileVO;
+
 import lombok.Data;
 
 @Data

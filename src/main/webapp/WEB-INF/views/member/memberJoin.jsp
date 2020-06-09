@@ -44,7 +44,7 @@
       <label for="age">나이: </label>
       <form:input path="age" type="text" class="form-control" id="age" placeholder="Enter age" name="age"/>
       <form:errors path="age" cssClass="r"></form:errors>
-    </div>  
+    </div> 
     <div class="form-group">
       <label for="email">이메일: </label>
       <form:input path="email" type="text" class="form-control" id="email" placeholder="Enter email" name="email"/>
@@ -55,6 +55,12 @@
       <form:input path="phone" type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone"/>
       <form:errors path="phone" cssClass="r"></form:errors>
     </div>   
+    
+    <div class="form-group">
+    	 <label for="avatar">프로필사진: </label>
+	 	 <input type="file" class="form-control" id="pic" name="avatar">
+	</div>	
+    ㄴ
     
 	<button type="submit" class="btn btn-default">Submit</button>
   </form:form>
