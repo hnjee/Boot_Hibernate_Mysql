@@ -3,7 +3,6 @@ package com.hj.s1.member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository 
 public interface MemberRepository extends JpaRepository<MemberVO, String>{
 	//내장 메서드
 	//쿼리문 대신 메서드가 제공
