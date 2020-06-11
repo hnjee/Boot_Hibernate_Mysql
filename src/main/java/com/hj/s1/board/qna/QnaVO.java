@@ -20,11 +20,11 @@ import lombok.EqualsAndHashCode;
 @Table(name="qna")
 public class QnaVO extends BoardVO{
 	@Column
-	private long ref;
+	private Long ref;
 	@Column
-	private long step;
+	private Long step;
 	@Column
-	private long depth;
+	private Long depth;
 	
 	//자기자신To상대 
 	//mappedBy="변수명"

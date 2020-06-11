@@ -1,6 +1,9 @@
 package com.hj.s1.board.qna;
 
+
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class QnaService {
 	@Autowired
 	private QnaRepository qnaRepository;
@@ -22,6 +26,9 @@ public class QnaService {
 	}
 	
 	public QnaVO boardWrite(QnaVO qnaVO)throws Exception{
+		qnaVO.setRef(0L);
+		qnaVO.setStep(0L);
+		qnaVO.setDepth(0L);
 		qnaVO = qnaRepository.save(qnaVO);
 		qnaVO.setRef(qnaVO.getNum());
 		return qnaRepository.save(qnaVO);

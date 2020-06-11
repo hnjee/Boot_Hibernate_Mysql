@@ -57,7 +57,6 @@
 		</tr>
 		</c:forEach>	
 	</table>
-     
 
     <div>
     		<a href="#" class="customPager" title="0"> << </a>
@@ -109,7 +108,6 @@
 	}else {
 		$("#"+kind).prop("selected", true);
 	}
-
 	var result = '${result}';
 	if(result != '') {
 		if(result == 1) {

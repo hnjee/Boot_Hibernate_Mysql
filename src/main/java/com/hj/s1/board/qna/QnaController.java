@@ -59,6 +59,7 @@ public class QnaController {
 	public ModelAndView boardWrite() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/boardWrite");
+		mv.addObject("path", "Write");
 		mv.addObject("boardVO", new QnaVO());
 		return mv;
 	}
@@ -66,7 +67,7 @@ public class QnaController {
 	@PostMapping("qnaWrite")
 	public ModelAndView boardWrite(QnaVO qnaVO, ModelAndView mv) throws Exception{
 		qnaVO = qnaService.boardWrite(qnaVO);
-		mv.setViewName("board/boardList");
+		mv.setViewName("redirect:/qna/qnaList");
 		return mv;
 	}
 }
