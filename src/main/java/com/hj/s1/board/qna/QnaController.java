@@ -2,6 +2,7 @@ package com.hj.s1.board.qna;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.hj.s1.util.Pager;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -23,10 +26,10 @@ public class QnaController {
 		return "qna";
 	}
 	@GetMapping("qnaList")
-									//size=perPage, page=curPage(0부터시작), direction=정렬, sort={"정렬기준컬럼명"}
-	public ModelAndView boardList(@PageableDefault(size = 10, page = 0, direction=Direction.DESC, sort= {"num"}) Pageable pageable) throws Exception{
+								//size=perPage, page=curPage(0부터시작), direction=정렬, sort={"정렬기준컬럼명"}
+	public ModelAndView boardList(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		Page<QnaVO> page = qnaService.boardList(pageable);
+		Page<QnaVO> page = qnaService.boardList(pager);
 		
 //		System.out.println(page.getContent().size());	// 한 페이지에 나오는 VO수 
 //		System.out.println(page.getSize());

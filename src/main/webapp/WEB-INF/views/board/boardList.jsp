@@ -104,6 +104,8 @@
 		
 	var kind = '${param.kind}';
 	if(kind == ''){
+
+		
 		$("#title").prop("selected", true);
 	}else {
 		$("#"+kind).prop("selected", true);
