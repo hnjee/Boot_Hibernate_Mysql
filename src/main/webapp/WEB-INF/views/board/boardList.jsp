@@ -15,7 +15,8 @@
 
 <div class="container">
 	<h2>${board} List</h2>
-	<form  action="./${board}List">
+	<form  action="./${board}List" id="frm">
+		<input type="hidden" name="page" id="p">
 	    <div>
 		  <div class="col-sm-1" style="padding-left: 0; padding-right:5px; margin-bottom: 10px; float:left;" >
 			  <select class="form-control col-sm-5" id="sel1" name="kind">
@@ -26,11 +27,9 @@
 		  </div>
 		  
 	      <div class="col-sm-2" style="padding-left: 0; padding-right:5px;margin-bottom: 10px; float:left">
-				<input type="text" class="form-control" name="search">	
+				<input type="text" class="form-control" placeholder="Search" name="search" value="${param.search}">	
 		  </div>	 
-	  
 	        <button style="float:left"class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-
 	    </div>
 	 </form>
 	 
@@ -61,28 +60,19 @@
      
 
     <div>
-    		<a href="./${board}List?page=0"> << </a>
+    		<a href="#" class="customPager" title="0"> << </a>
  			<c:if test="${page.hasPrevious()}">
-	   			<a href="./${board}List?page=${page.number-1}"> ◁ </a>
+	   			<a href="#" class="customPager" title="${page.number-1}"> ◁ </a>
 	   		</c:if>
 	    	<c:forEach begin="${page.number}" end="${page.number+4}" var="i">
 	    			<c:if test="${i lt page.getTotalPages()}">
-	    			<a href="./${board}List?page=${i}">${i+1}</a>
+	    			<a href="#" class="customPager" title="${i}">${i+1}</a>
 	   			 	</c:if>
 			</c:forEach>
 	   		<c:if test="${page.hasNext()}">
-	   			<a href="./${board}List?page=${page.number+1}"> ▷ </a>
+	   			<a href="#" class="customPager" title="${page.number+1}"> ▷ </a>
 	   		</c:if>
-	   		<a href="./${board}List?page=${page.getTotalPages()-1}"> >> </a>
-	   		
-	   		<hr>
-	  	 	<c:if test="${not page.isFirst()}">
-				<a href="./${board}List?page=${page.number-1}">[이전페이지]</a>
-			</c:if>
-			<span>${page.number+1}</span>
-			<c:if test="${not page.isLast()}">
-				<a href="./${board}List?page=${page.number+1}">[다음페이지]</a>		
-			</c:if>
+	   		<a href="#" class="customPager" title="${page.getTotalPages()-1}"> >> </a>
     </div>
 	
 	<!--    	<c:forEach begin="1" end="${page.totalPages}"  var="i">
@@ -107,11 +97,26 @@
 
 
 <script type="text/javascript">
-	var result='${result}';
-	if(result!=''){
-		if(result=='1'){
-			alert('${path} 성공');
-		}		
+	$(".customPager").click(function(){
+		var page=$(this).attr("title");
+		$("#p").val(page);
+		$("#frm").submit();
+	});
+		
+	var kind = '${param.kind}';
+	if(kind == ''){
+		$("#title").prop("selected", true);
+	}else {
+		$("#"+kind).prop("selected", true);
+	}
+
+	var result = '${result}';
+	if(result != '') {
+		if(result == 1) {
+			alert("게시글 쓰기 성공");
+		} else {
+			alert("게시글 쓰기 실패");
+		}
 	}
 </script>
 
