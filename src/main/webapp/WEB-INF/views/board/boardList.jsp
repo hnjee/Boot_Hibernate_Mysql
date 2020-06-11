@@ -43,7 +43,7 @@
 			<td>Hit</td>
 		</tr>
 		
-		<c:forEach items="${list}" var="vo">
+		<c:forEach items="${page.content}" var="vo">
 		<tr>
 			<td>${vo.num}</td>
 			<td>
@@ -57,11 +57,38 @@
 			<td>${vo.hit}</td>
 		</tr>
 		</c:forEach>	
-		
-		
 	</table>
      
-	<ul class="pagination">
+
+    <div>
+    		<a href="./${board}List?page=0"> << </a>
+ 			<c:if test="${page.hasPrevious()}">
+	   			<a href="./${board}List?page=${page.number-1}"> ◁ </a>
+	   		</c:if>
+	    	<c:forEach begin="${page.number}" end="${page.number+4}" var="i">
+	    			<c:if test="${i lt page.getTotalPages()}">
+	    			<a href="./${board}List?page=${i}">${i+1}</a>
+	   			 	</c:if>
+			</c:forEach>
+	   		<c:if test="${page.hasNext()}">
+	   			<a href="./${board}List?page=${page.number+1}"> ▷ </a>
+	   		</c:if>
+	   		<a href="./${board}List?page=${page.getTotalPages()-1}"> >> </a>
+	   		
+	   		<hr>
+	  	 	<c:if test="${not page.isFirst()}">
+				<a href="./${board}List?page=${page.number-1}">[이전페이지]</a>
+			</c:if>
+			<span>${page.number+1}</span>
+			<c:if test="${not page.isLast()}">
+				<a href="./${board}List?page=${page.number+1}">[다음페이지]</a>		
+			</c:if>
+    </div>
+	
+	<!--    	<c:forEach begin="1" end="${page.totalPages}"  var="i">
+     		${i}
+    	</c:forEach>  -->
+	<!--  <ul class="pagination">
 		<c:if test="${pager.curBlock gt 1}">
 			<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"> < </a></li>
 		</c:if>
@@ -73,7 +100,7 @@
 		<c:if test="${pager.curBlock lt pager.totalBlock}">
 	 		<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"> > </a></li>
 		</c:if>
-	</ul>
+	</ul>-->
 	
 	<div><a href="./${board}Write" class="btn btn-danger">Write</a></div>
 </div>
