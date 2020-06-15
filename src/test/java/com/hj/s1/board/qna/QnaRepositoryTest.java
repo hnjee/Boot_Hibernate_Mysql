@@ -13,14 +13,14 @@ public class QnaRepositoryTest {
 	@Autowired
 	private QnaService qnaService;
 	
-	@Test
-	public void insertTest() throws Exception{
-		for(int i=100; i<200; i++) {
-			QnaVO qnaVO = new QnaVO();
-			qnaVO.setTitle("title"+i);
-			qnaVO.setContents("contents"+i);
-			qnaVO.setWriter("writer"+i);
-			qnaVO = qnaService.boardWrite(qnaVO);
-		}
-	}
+//	@Test
+//	public void insertTest() throws Exception{
+//		for(int i=100; i<200; i++) {
+//			QnaVO qnaVO = new QnaVO();
+//			qnaVO.setTitle("title"+i);
+//			qnaVO.setContents("contents"+i);
+//			qnaVO.setWriter("writer"+i);
+//			qnaVO = qnaService.boardWrite(qnaVO);
+//		}
+//	}
 }

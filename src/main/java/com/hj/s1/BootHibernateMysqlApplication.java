@@ -9,5 +9,4 @@ public class BootHibernateMysqlApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BootHibernateMysqlApplication.class, args);
 	}
-
 }

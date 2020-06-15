@@ -3,12 +3,11 @@ package com.hj.s1.board;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,19 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public class BoardVO {
+public class BoardFileVO {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) 
-	private Long num;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long fileNum;
 	@Column
-	private String title;
+	private String fileName;
 	@Column
-	private String writer;
-	@Column
-	private String contents;
-	@Column
-	@CreationTimestamp
-	private Date regDate;
-
-	private Long hit; 
+	private String oriName;
 }

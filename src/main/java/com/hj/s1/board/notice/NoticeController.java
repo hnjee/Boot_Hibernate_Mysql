@@ -36,12 +36,10 @@ public class NoticeController {
 	//@PageableDefault(page = 0, size = 10, sort = {"num"}, direction = Direction.DESC) Pageable pageable
 	public ModelAndView selectList(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<NoticeVO> ar = noticeService.selectList(pager);
-		//									(page, size, Sort, column)
-		//Pageable pageable = PageRequest.of(0, 10, Sort.Direction.DESC, "num");
-	
+		Page<NoticeVO> ar = noticeService.selectList(pager);
+		
 		mv.addObject("pager", pager);
-		mv.addObject("list", ar);
+		mv.addObject("page", ar);
 		mv.setViewName("board/boardList"); //../WEB-INF/views/board/boardSelect.jsp
 		return mv;
 	}
@@ -82,6 +80,8 @@ public class NoticeController {
 	
 	@PostMapping("noticeUpdate")
 	public ModelAndView update2(ModelAndView mv, NoticeVO noticeVO) throws Exception{
+		System.out.println("dd"+noticeVO.getTitle());
+		System.out.println("dd"+noticeVO.getHit());
 		noticeVO = noticeService.update(noticeVO);
 		mv.setViewName("redirect:notice/noticeList");
 		return mv;

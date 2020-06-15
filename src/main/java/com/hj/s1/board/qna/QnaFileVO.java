@@ -8,20 +8,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.hj.s1.board.BoardFileVO;
 import com.hj.s1.board.notice.NoticeVO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper=false)
 @Table(name="qnaFile")
-public class QnaFileVO {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long fileNum;
-	private String fileName;
-	private String oriName;
-	
+public class QnaFileVO extends BoardFileVO{
 	@ManyToOne
 	@JoinColumn(name="num")
 	private QnaVO qnaVO;

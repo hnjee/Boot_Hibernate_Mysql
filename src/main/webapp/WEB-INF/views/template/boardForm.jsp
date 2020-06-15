@@ -9,9 +9,15 @@
 	    <input type="text" class="form-control" value="${vo.title}" id="title" name="title">
 	  </div>
 	  
+	 
 	  <div class="form-group">
 	    <label for="writer">Writer:</label>
-	    <input type="text" class="form-control" id="writer" value="${vo.writer}" name="writer">
+	    <c:if test="${path ne 'Update'}">
+		  <input type="text" class="form-control" id="writer" value="${writer}" name="writer" readonly="readonly">
+		</c:if>
+		<c:if test="${path eq 'Update'}">
+		   <input type="text" class="form-control" id="writer" value="${vo.writer}" name="writer" readonly="readonly">
+		</c:if>
 	  </div>
 	  
 	  <div class="form-group">

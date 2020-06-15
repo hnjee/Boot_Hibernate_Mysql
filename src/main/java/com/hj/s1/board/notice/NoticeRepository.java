@@ -2,19 +2,22 @@ package com.hj.s1.board.notice;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.hj.s1.board.qna.QnaVO;
+
 
 public interface NoticeRepository extends JpaRepository<NoticeVO, Long>{
-	public int countByTitleContaining(String search);
-	public int countByWriterContaining(String search);
-	public int countByContentsContaining(String search);
+	//title 검색
+	Page<NoticeVO> findByTitleContaining(String search, Pageable pageable);	
+	//contents 검색 	
+	Page<NoticeVO> findByContentsContaining(String search, Pageable pageable);	
+	//writer 검색
+	Page<NoticeVO> findByWriterContaining(String search, Pageable pageable);
 	
 	
-	public List<NoticeVO> findByTitleContaining(String search, Pageable pageable);	
-	public List<NoticeVO> findByWriterContaining(String search, Pageable pageable);	
-	public List<NoticeVO> findByContentsContaining(String search, Pageable pageable);	
 	
 	//select * from notice where num>0 order by num desc
 	public List<NoticeVO> findByNumGreaterThanOrderByNumDesc(long num);

@@ -15,7 +15,7 @@
 
 <div class="container">
 	<h2>${board} List</h2>
-	<form  action="./${board}List" id="frm">
+	<form action="./${board}List" id="frm">
 		<input type="hidden" name="page" id="p">
 	    <div>
 		  <div class="col-sm-1" style="padding-left: 0; padding-right:5px; margin-bottom: 10px; float:left;" >
@@ -57,7 +57,25 @@
 		</tr>
 		</c:forEach>	
 	</table>
-
+	
+	
+<div class="container">
+	<ul class="pagination">
+		<c:if test="${pager.curBlock>1}">
+			<li><a href="#" class="custompager" title="${pager.startNum-1}">이전</a></li>
+		</c:if>
+		
+		<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
+			<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+		</c:forEach>
+		
+		<c:if test="${pager.curBlock<pager.totalBlock}">
+			<li><a href="#" class="custompager" title="${pager.lastNum+1}">다음</a></li>
+		</c:if>
+	</ul>
+</div>
+	
+	<!-- 
     <div>
     		<a href="#" class="customPager" title="0"> << </a>
  			<c:if test="${page.hasPrevious()}">
@@ -72,12 +90,13 @@
 	   			<a href="#" class="customPager" title="${page.number+1}"> ▷ </a>
 	   		</c:if>
 	   		<a href="#" class="customPager" title="${page.getTotalPages()-1}"> >> </a>
-    </div>
+    </div>  -->
 	
-	<!--    	<c:forEach begin="1" end="${page.totalPages}"  var="i">
+	<!-- <c:forEach begin="1" end="${page.totalPages}"  var="i">
      		${i}
-    	</c:forEach>  -->
-	<!--  <ul class="pagination">
+    	 </c:forEach>  -->
+    
+    <!--  <ul class="pagination">
 		<c:if test="${pager.curBlock gt 1}">
 			<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"> < </a></li>
 		</c:if>
@@ -96,20 +115,20 @@
 
 
 <script type="text/javascript">
-	$(".customPager").click(function(){
+	$(".custompager").click(function(){
 		var page=$(this).attr("title");
 		$("#p").val(page);
 		$("#frm").submit();
 	});
-		
+
 	var kind = '${param.kind}';
 	if(kind == ''){
-
-		
 		$("#title").prop("selected", true);
 	}else {
 		$("#"+kind).prop("selected", true);
 	}
+	
+	
 	var result = '${result}';
 	if(result != '') {
 		if(result == 1) {
